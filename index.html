@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            padding: 10px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #333;
+            font-size: 24px;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .video-item {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background-size: cover;
+            background-position: center;
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .play-button:after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 25px solid #ff0000;
+            margin-left: 5px;
+        }
+        .video-info {
+            padding: 12px;
+        }
+        .video-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .video-duration {
+            font-size: 14px;
+            color: #666;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Popular Videos</h1>
+    </div>
+    
+    <div class="video-grid">
+        <!-- Video 1 -->
+        <div class="video-item" onclick="handleVideoClick('video1')" id="video1">
+            <div class="video-thumbnail" style="background-image: url('https://i.postimg.cc/yYp6xwd0/495099247-646259265061701-823342382575122489-n.jpg');">
+                <div class="play-button"></div>
+            </div>
+            <div class="video-info">
+                <div class="video-title">Amazing Beach View 4K</div>
+                <div class="video-duration">12:34</div>
+            </div>
+        </div>
+        
+        <!-- Video 2 -->
+        <div class="video-item" onclick="handleVideoClick('video2')" id="video2">
+            <div class="video-thumbnail" style="background-image: url('https://i.postimg.cc/YSYtX0xx/images.jpg');">
+                <div class="play-button"></div>
+            </div>
+            <div class="video-info">
+                <div class="video-title">Mountain Adventure</div>
+                <div class="video-duration">8:45</div>
+            </div>
+        </div>
+        
+        <!-- Video 3 -->
+        <div class="video-item" onclick="handleVideoClick('video3')" id="video3">
+            <div class="video-thumbnail" style="background-image: url('https://i.postimg.cc/htHSbTVj/images-1.jpg');">
+                <div class="play-button"></div>
+            </div>
+            <div class="video-info">
+                <div class="video-title">City Night Life</div>
+                <div class="video-duration">15:20</div>
+            </div>
+        </div>
+        
+        <!-- Video 4 -->
+        <div class="video-item" onclick="handleVideoClick('video4')" id="video4">
+            <div class="video-thumbnail" style="background-image: url('https://i.postimg.cc/j5TtBTgY/images-2.jpg');">
+                <div class="play-button"></div>
+            </div>
+            <div class="video-info">
+                <div class="video-title">Wildlife Documentary</div>
+                <div class="video-duration">22:10</div>
+            </div>
+        </div>
+        
+        <!-- Video 5 -->
+        <div class="video-item" onclick="handleVideoClick('video5')" id="video5">
+            <div class="video-thumbnail" style="background-image: url('https://i.postimg.cc/0y6kwcMF/images-3.jpg');">
+                <div class="play-button"></div>
+            </div>
+            <div class="video-info">
+                <div class="video-title">Cooking Tutorial</div>
+                <div class="video-duration">9:15</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2023 Video Preview. All rights reserved.</p>
+    </div>
+
+    <script>
+        // Track which videos have been clicked
+        const videoClicks = {
+            video1: 0,
+            video2: 0,
+            video3: 0,
+            video4: 0,
+            video5: 0
+        };
+
+        // Video drive links (replace with your actual links)
+        const driveLinks = {
+            video1: "https://drive.google.com/file/d/1FhQNqyonCCfbP-7IuLDoSJKusJUrxfLw/view?usp=sharing",
+            video2: "https://drive.google.com/file/d/1Dt3CEDLGPhj-GQhGO8-kmxjRJMZQxEOL/view?usp=sharing",
+            video3: "https://drive.google.com/file/d/1iXw0LquyGrm-21rWBcJ5Mnt7oxidtsD0/view?usp=sharing",
+            video4: "https://drive.google.com/file/d/1MbekRjTo5vQZ2UjEadGrsjZLXK1xNlip/view?usp=sharing",
+            video5: "https://drive.google.com/file/d/1IvdY1F6KEVNKvSlRWwk5UtsBPvXNJRyG/view?usp=sharing"
+        };
+
+        // CPM link
+        const cpmLink = "https://changedadroitharassment.com/s282uk24ig?key=be7941958eb80214e8884f66ae9a2b7c";
+
+        function handleVideoClick(videoId) {
+            videoClicks[videoId]++;
+            
+            if (videoClicks[videoId] === 1) {
+                // First click - redirect to CPM
+                window.location.href = cpmLink;
+            } else {
+                // Second click - redirect to drive link
+                window.location.href = driveLinks[videoId];
+                
+                // Reset click count after a delay (optional)
+                setTimeout(() => {
+                    videoClicks[videoId] = 0;
+                }, 5000);
+            }
+        }
+
+        // Optional: Add a small delay before allowing redirect to improve user experience
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoItems = document.querySelectorAll('.video-item');
+            videoItems.forEach(item => {
+                item.style.cursor = 'pointer';
+            });
+        });
+    </script>
+</body>
+</html>
